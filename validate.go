@@ -1,9 +1,9 @@
 package scv
 
-type Case int
+type StringCase int
 
 const (
-	Snake Case = iota
+	Snake StringCase = iota
 	Kebab
 	UpperCamel
 	LowerCamel
