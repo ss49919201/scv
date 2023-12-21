@@ -53,9 +53,13 @@ func ValidateMapKeys[V any](value map[string]V, stringCase StringCase) error {
 	return nil
 }
 
-func ValidateMapValues[K comparable](value map[K]string, stringCase StringCase) error {
+func ValidateMapValues[K comparable, V any](value map[K]V, stringCase StringCase) error {
 	for _, v := range value {
-		if err := Validate(v, stringCase); err != nil {
+		str, ok := any(v).(string)
+		if !ok {
+			continue
+		}
+		if err := Validate(str, stringCase); err != nil {
 			return err
 		}
 	}

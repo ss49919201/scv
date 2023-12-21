@@ -126,7 +126,7 @@ func TestValidateMapKeys(t *testing.T) {
 
 func TestValidateMapValues(t *testing.T) {
 	type args struct {
-		value      map[string]string
+		value      map[string]any
 		stringCase StringCase
 	}
 	tests := []struct {
@@ -137,7 +137,7 @@ func TestValidateMapValues(t *testing.T) {
 		{
 			"snake case",
 			args{
-				value:      map[string]string{"key": "snale_case"},
+				value:      map[string]any{"key": "snale_case"},
 				stringCase: Snake,
 			},
 			false,
@@ -145,7 +145,7 @@ func TestValidateMapValues(t *testing.T) {
 		{
 			"kebab case",
 			args{
-				value:      map[string]string{"key": "kabel-case"},
+				value:      map[string]any{"key": "kabel-case"},
 				stringCase: Kebab,
 			},
 			false,
@@ -153,7 +153,7 @@ func TestValidateMapValues(t *testing.T) {
 		{
 			"upper camel case",
 			args{
-				value:      map[string]string{"key": "UpperCamelCase"},
+				value:      map[string]any{"key": "UpperCamelCase"},
 				stringCase: UpperCamel,
 			},
 			false,
@@ -161,15 +161,23 @@ func TestValidateMapValues(t *testing.T) {
 		{
 			"lower camel case",
 			args{
-				value:      map[string]string{"key": "lowerCamel"},
+				value:      map[string]any{"key": "lowerCamel"},
 				stringCase: LowerCamel,
+			},
+			false,
+		},
+		{
+			"skip not string",
+			args{
+				value:      map[string]any{"key": 1},
+				stringCase: Snake,
 			},
 			false,
 		},
 		{
 			"invalid case",
 			args{
-				value:      map[string]string{"key": "invalid_case"},
+				value:      map[string]any{"key": "invalid_case"},
 				stringCase: 1_000_000,
 			},
 			true,
