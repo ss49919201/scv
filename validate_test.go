@@ -17,7 +17,7 @@ func TestValidate(t *testing.T) {
 		{
 			"snake case",
 			args{
-				value:      "snale_case",
+				value:      "snake_case",
 				stringCase: Snake,
 			},
 			false,
@@ -77,7 +77,7 @@ func TestValidateMapKeys(t *testing.T) {
 		{
 			"snake case",
 			args{
-				value:      map[string]string{"snale_case": "value"},
+				value:      map[string]string{"snake_case": "value"},
 				stringCase: Snake,
 			},
 			false,
@@ -137,7 +137,7 @@ func TestValidateMapValues(t *testing.T) {
 		{
 			"snake case",
 			args{
-				value:      map[string]any{"key": "snale_case"},
+				value:      map[string]any{"key": "snake_case"},
 				stringCase: Snake,
 			},
 			false,
