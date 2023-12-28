@@ -6,7 +6,7 @@ on:
     branches: [ main, release ]
 jobs:
   lint:
-    name: runner/test
+    name: runner/lint
     runs-on: ubuntu-latest
     steps:
       - name: checkout
