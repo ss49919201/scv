@@ -17,7 +17,7 @@ const (
 )
 
 func Validate(value string, stringCase StringCase) error {
-	converter := func() func(string) string {
+	convert := func() func(string) string {
 		switch stringCase {
 		case Snake:
 			return strcase.ToSnake
@@ -32,11 +32,11 @@ func Validate(value string, stringCase StringCase) error {
 		}
 	}()
 
-	if converter == nil {
+	if convert == nil {
 		return errors.New("invalid string case")
 	}
 
-	expect := converter(value)
+	expect := convert(value)
 	if value != expect {
 		return fmt.Errorf("expect string case is %s, actual is %s", expect, value)
 	}
